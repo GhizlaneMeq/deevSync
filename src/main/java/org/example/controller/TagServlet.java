@@ -3,11 +3,11 @@ package org.example.controller;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.model.entities.Tag;
+import org.example.model.entities.Task;
 import org.example.repository.implementation.TagRepositoryImpl;
 import org.example.repository.interfaces.TagRepository;
 import org.example.service.TagService;
@@ -15,7 +15,7 @@ import org.example.service.TagService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/tags")
+
 public class TagServlet extends HttpServlet {
 
     TagService tagService;
