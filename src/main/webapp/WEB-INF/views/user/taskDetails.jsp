@@ -3,59 +3,85 @@
 
 <html>
 <head>
-    <title>Task Details</title>
+    <title>Title</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gradient-to-br from-gray-900 to-black text-gray-300">
+<body class="bg-gray-900 text-gray-200">
 
-<header class="bg-gray-800 shadow-lg py-4">
-    <div class="container mx-auto flex justify-between items-center px-4">
-        <div class="text-white text-2xl font-bold">DevSync</div>
-        <p class="text-sm text-gray-400">Your Next-Level Task Management Solution</p>
-        <div class="flex items-center space-x-4">
-            <a href="users?action=userInterface&id=${task.assignee.id}" class="text-sm font-medium text-gray-300 hover:text-gray-400">View All tasks</a>
+<header class="bg-gray-800">
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-white sm:text-3xl">DevSync</h1>
+                <p class="mt-1.5 text-sm text-gray-400">
+                    Your Next-Level Task Management Solution
+                </p>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="users?action=userInterface&id=${task.assignee.id}"
+                   class="inline-flex items-center justify-center gap-1.5 rounded border border-gray-600 bg-gray-800 px-5 py-3 text-white transition hover:bg-gray-700 focus:outline-none focus:ring"
+                >
+                    <span class="text-sm font-medium"> View All tasks </span>
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="size-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                    >
+                        <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
 </header>
 
-<div class="flow-root mx-10 my-8">
+<div class="flow-root mx-10">
     <dl class="-my-3 divide-y divide-gray-700 text-sm">
         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-200">Title</dt>
+            <dt class="font-medium text-white">Title</dt>
             <dd class="text-gray-300 sm:col-span-2">${task.title}</dd>
         </div>
 
         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-200">Start Date</dt>
+            <dt class="font-medium text-white">Start Date</dt>
             <dd class="text-gray-300 sm:col-span-2">${task.creationDate}</dd>
         </div>
 
         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-200">Due Date</dt>
+            <dt class="font-medium text-white">Due Date</dt>
             <dd class="text-gray-300 sm:col-span-2">${task.dueDate}</dd>
         </div>
 
         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-200">Status</dt>
+            <dt class="font-medium text-white">Status</dt>
             <dd class="text-gray-300 sm:col-span-2">
                 <form action="tasks?action=editStatus" method="POST">
                     <input type="hidden" name="task_id" value="${task.id}" />
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 sm:col-span-2 w-min
-            <c:choose>
-              <c:when test="${task.status == 'NOT_STARTED'}">
-                 text-yellow-500
-              </c:when>
-              <c:when test="${task.status == 'IN_PROGRESS'}">
-                text-blue-500
-              </c:when>
-              <c:when test="${task.status == 'COMPLETED'}">
-                 text-green-500
-              </c:when>
-              <c:when test="${task.status == 'CANCELED'}">
-                 text-red-500
-              </c:when>
-            </c:choose>" type="button">${task.status}
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 sm:col-span-2 w-min
+                <c:choose>
+                  <c:when test="${task.status == 'NOT_STARTED'}">
+                    bg-yellow-500/60 text-white
+                  </c:when>
+                  <c:when test="${task.status == 'IN_PROGRESS'}">
+                    bg-blue-500/60 text-white
+                  </c:when>
+                  <c:when test="${task.status == 'COMPLETED'}">
+                    bg-green-500/60 text-white
+                  </c:when>
+                  <c:when test="${task.status == 'CANCELED'}">
+                    bg-red-500/60 text-white
+                  </c:when>
+                </c:choose>" type="button">${task.status}
                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>
@@ -64,13 +90,13 @@
                     <div id="dropdown" class="z-10 hidden bg-gray-800 divide-y divide-gray-700 rounded-lg shadow w-44">
                         <ul class="py-2 text-sm text-gray-300" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <button class="block px-4 py-2 hover:bg-gray-700" type="submit" name="status" value="NOT_STARTED">NOT_STARTED</button>
+                                <button class="block px-4 py-2 hover:bg-gray-600" type="submit" name="status" value="NOT_STARTED">NOT_STARTED</button>
                             </li>
                             <li>
-                                <button class="block px-4 py-2 hover:bg-gray-700" type="submit" name="status" value="IN_PROGRESS">IN_PROGRESS</button>
+                                <button class="block px-4 py-2 hover:bg-gray-600" type="submit" name="status" value="IN_PROGRESS">IN_PROGRESS</button>
                             </li>
                             <li>
-                                <button class="block px-4 py-2 hover:bg-gray-700" type="submit" name="status" value="COMPLETED">COMPLETED</button>
+                                <button class="block px-4 py-2 hover:bg-gray-600" type="submit" name="status" value="COMPLETED">COMPLETED</button>
                             </li>
                         </ul>
                     </div>
@@ -79,37 +105,37 @@
         </div>
 
         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-200">Description</dt>
+            <dt class="font-medium text-white">Description</dt>
             <dd class="text-gray-300 sm:col-span-2">${task.description}</dd>
         </div>
 
         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-200">Tags</dt>
+            <dt class="font-medium text-white">Tags</dt>
             <dd class="text-gray-300 sm:col-span-2">
                 <c:forEach var="tag" items="${task.tags}">
-                    <span class="whitespace-nowrap rounded-full bg-purple-700 px-2.5 py-0.5 text-sm text-purple-200">${tag.name}</span>
+              <span class="whitespace-nowrap rounded-full bg-purple-600 px-2.5 py-0.5 text-sm text-white">
+                      ${tag.name}
+              </span>
                 </c:forEach>
             </dd>
         </div>
 
         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-            <dt class="font-medium text-gray-200"></dt>
+            <dt class="font-medium text-white"></dt>
             <dd class="flex gap-4 text-gray-300 sm:col-span-2">
                 <c:if test="${task.creator == task.assignee}">
-                    <!-- Button for task creator -->
                     <form action="requests?action=removeTask&id=${task.id}" method="POST">
                         <input type="hidden" name="task_id" value="${task.id}" />
-                        <button type="submit" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-sm px-5 py-2.5">
+                        <button type="submit" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
                             Delete (Creator)
                         </button>
                     </form>
                 </c:if>
 
                 <c:if test="${task.creator != task.assignee}">
-                    <!-- Button for non-creator users -->
                     <form action="requests?action=deleteRequest&id=${task.id}" method="POST">
                         <input type="hidden" name="task_id" value="${task.id}" />
-                        <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 rounded-lg text-sm px-5 py-2.5">
+                        <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
                             Delete
                         </button>
                     </form>
@@ -118,7 +144,7 @@
                 <c:if test="${task.creator != task.assignee}">
                     <form action="requests?action=swapTask&id=${task.id}" method="POST">
                         <input type="hidden" name="task_id" value="${task.id}" />
-                        <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 rounded-lg text-sm px-5 py-2.5">Swap Task</button>
+                        <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Swap Task</button>
                     </form>
                 </c:if>
             </dd>
